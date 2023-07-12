@@ -4,14 +4,26 @@
     <span class="addContainer" v-on:click="addTodo">
       <i class="addBtn fa fa-plus" aria-hidden="true"></i>
     </span>
+
+    <modal v-if="showModal" @close="showModal = false">
+      <h3 slot="header">경고</h3>
+      <span slot="footer" @click="showModal = false">
+        할 일을 입력하세요
+        <i class="closeModalBtn fa fa-times" aira-hidden="true"></i>
+      </span>
+    </modal>
   </div>
 </template>
 
 <script>
+
+import Modal from './common/Modal.vue'
+
 export default {
   data() {
     return {
-      newTodoItem: ''
+      newTodoItem: '',
+      showModal: false
     }
   },
   methods: {
@@ -20,12 +32,17 @@ export default {
         const value = this.newTodoItem && this.newTodoItem.trim();      
         this.$emit('addTodo', value)
         this.clearIntput();
+      } else {
+        this.showModal = !this.showModal;
       }
     },
     clearIntput() {
       this.newTodoItem = '';
+    },    
+  },
+  components: {
+      Modal: Modal
     }
-  }
 }
 </script>
 
