@@ -18,7 +18,7 @@ export default {
     addTodo() {
       if (this.newTodoItem !== ""){
         const value = this.newTodoItem && this.newTodoItem.trim();      
-        localStorage.setItem(this.newTodoItem, this.newTodoItem);
+        this.$emit('addTodo', value)
         this.clearIntput();
       }
     },
@@ -34,12 +34,15 @@ export default {
     outline: none;
   }
   .inputBox {
+    display: flex;
     background: white;
     height: 50px;
     line-height: 50px;
     border-radius: 5px;
   }
   .inputBox input {
+    width: 100%;
+    margin: 0 1rem 0 1rem;
     border-style: none;
     font-size: 0.9rem;
   }
